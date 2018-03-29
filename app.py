@@ -129,9 +129,6 @@ def index():
 def all_lists():
     form = DeleteButtonForm()
     lsts = TodoList.query.all()
-    if form.validate_on_submit():
-        #lst=
-        return redirect(url_for('delete', lst=lst))
     return render_template('all_lists.html', todo_lists=lsts,  form=form)
 
 # TODO 364: Update the all_lists.html template and the all_lists view function such that there is a delete button available for each ToDoList saved.
@@ -143,9 +140,6 @@ def one_list(ident):
     form = UpdateButtonForm()
     lst = TodoList.query.filter_by(id=ident).first()
     items = lst.items.all()
-    if form.validate_on_submit():
-        # item=
-        return redirect(url_for('update', item=item))
     return render_template('list_tpl.html', todolist=lst, items=items, form=form)
 # TODO 364: Update the one_list view function and the list_tpl.html view file so that there is an Update button next to each todolist item, and the priority integer of that item can be updated. (This is also addressed in later TODOs.)
 # HINT: These template updates are minimal, but that small update(s) make(s) a big change in what you can do in the app! Check out the examples from previous classes for help.
