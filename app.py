@@ -129,7 +129,7 @@ def index():
 def all_lists():
     form = DeleteButtonForm()
     lsts = TodoList.query.all()
-    if form.validate_on_sumit():
+    if form.validate_on_submit():
         #lst=
         return redirect(url_for('delete', lst=lst))
     return render_template('all_lists.html', todo_lists=lsts,  form=form)
@@ -159,6 +159,7 @@ def update(item):
         item.priority = form.new_priority.data
         flash('Update priority of {}'.format(item.description))
         return redirect(url_for('all_links'))
+    return render_template('update_item.html', form=form)
     # This code should use the form you created above for updating the specific item and manage the process of updating the item's priority.
     # Once it is updated, it should redirect to the page showing all the links to todo lists.
     # It should flash a message: Updated priority of <the description of that item>
@@ -169,7 +170,11 @@ def update(item):
 # TODO 364: Complete route to delete a whole ToDoList
 @app.route('/delete/<lst>',methods=["GET","POST"])
 def delete(lst):
-    pass # Replace with code
+    title = lst.title
+    db.session.delete(lst)
+    db.session.commit()
+    flash('Deleted List {}'.format(title))
+    return redirect(url_for('all_links'))
     # This code should successfully delete the appropriate todolist
     # Should flash a message about what was deleted, e.g. Deleted list <title of list>
     # And should redirect the user to the page showing all the todo lists

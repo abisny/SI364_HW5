@@ -15,7 +15,7 @@ There are no TODO lists to show.
 {% for l in todo_lists %}
     <li>
         <a href="{{ url_for('one_list',ident=l.id)}}">{{ l.title }}</a><br>
-        {{ form.delete() }}<br>
+        <form action="" method="POST">{{ form.delete() }}<br></form>
     </li>
 {% endfor %}
 </ul>
