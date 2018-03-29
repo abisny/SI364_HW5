@@ -10,7 +10,8 @@
 <ul>
 {% for item in items %}
     <li>
-        {{ item.description }} - Priority: {{ item.priority }} 
+        {{ item.description }} - Priority: {{ item.priority }}<br>
+        {{ form.update() }}<br>
     </li>
 {% endfor %}
 </ul>
